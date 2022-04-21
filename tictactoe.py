@@ -7,16 +7,19 @@ Original file is located at
     https://colab.research.google.com/drive/1r4PmlTYokcw2fEYyMEdsMi4mOTh_gG8p
 """
 
-#stage1 creating tic tac toe board display
+#creating tic tac toe board display
 
 theBoard = ["-", "-", "-",
         "-", "-", "-",
         "-", "-", "-"]
 
+#assigning current player as X on the board
 currentPlayer = "X"
 
+#establishing the basis for the game loop
 gamePlaying = True
 
+#board functionality
 def print_board(theBoard):
     print(theBoard[0] + " | " + theBoard[1] + " | " + theBoard[2])
     print("---------")
@@ -26,8 +29,7 @@ def print_board(theBoard):
 print_board(theBoard)
 
 
-
-#stage 2 take marks from players one and two
+#player functionality
 
 def playerInput(theBoard):
   turn = (int(input("Enter a number 1-9: ")))
@@ -35,6 +37,41 @@ def playerInput(theBoard):
     theBoard[turn-1] = currentPlayer
   else:
     print("Choose another spot this one is not available")
+
+#functionality for win, lose or draw across, down or diagonal
+def checkAcross(theBoard):
+    global winner
+    if theBoard[0] == theBoard[1] == theBoard[2] and theBoard[0] != "-":
+        winner = theBoard[0]
+        return True
+    elif theBoard[3] == theBoard[4] == theBoard[5] and theBoard[3] != "-":
+        winner = theBoard[3]
+        return True
+    elif theBoard[6] == theBoard[7] == theBoard[8] and theBoard[6] != "-":
+        winner = theBoard[6]
+        return True
+
+def checkDown(theBoard):
+    global winner
+    if theBoard[0] == theBoard[3] == theBoard[6] and theBoard[0] != "-":
+        winner = theBoard[0]
+        return True
+    elif theBoard[1] == theBoard[4] == theBoard[7] and theBoard[1] != "-":
+        winner = theBoard[1]
+        return True
+    elif theBoard[2] == theBoard[5] == theBoard[8] and theBoard[2] != "-":
+        winner = theBoard[3]
+        return True
+
+
+def checkDiagonal(theBoard):
+    global winner
+    if theBoard[0] == theBoard[4] == theBoard[8] and theBoard[0] != "-":
+        winner = theBoard[0]
+        return True
+    elif theBoard[2] == theBoard[4] == theBoard[6] and theBoard[4] != "-":
+        winner = theBoard[2]
+        return True
 
 
 while gamePlaying:
