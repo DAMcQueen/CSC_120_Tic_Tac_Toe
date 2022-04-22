@@ -28,7 +28,6 @@ def print_board(theBoard):
     print(theBoard[6] + " | " + theBoard[7] + " | " + theBoard[8])
 print_board(theBoard)
 
-
 #player functionality
 
 def playerInput(theBoard):
@@ -63,7 +62,6 @@ def checkDown(theBoard):
         winner = theBoard[3]
         return True
 
-
 def checkDiagonal(theBoard):
     global winner
     if theBoard[0] == theBoard[4] == theBoard[8] and theBoard[0] != "-":
@@ -73,7 +71,34 @@ def checkDiagonal(theBoard):
         winner = theBoard[2]
         return True
 
+def checkForWin(theBoard):
+    global gamePlaying
+    if checkAcross(theBoard):
+        print_board(theBoard)
+        print(f"The winner is {winner}!")
+        gamePlaying = False
 
+def checkForTie(theBoard):
+    global gamePlaying
+    if "-" not in theBoard:
+      print_board(theBoard)
+      print("Folks we have a tie!")
+      gamePlaying = False
+
+# if there is no winner or tie, then the game switches player
+def switchPlayer():
+    global currentPlayer
+    if currentPlayer == "X":
+        currentPlayer = "O"
+    else:
+        currentPlayer = "X"
+    
+#Loop for game in progress
 while gamePlaying:
-  print_board(theBoard)
-  playerInput(theBoard)
+      print_board(theBoard)
+      playerInput(theBoard)
+      checkForWin(theBoard)
+      checkForTie(theBoard)
+      switchPlayer()
+      checkForWin(theBoard)
+      checkForTie(theBoard)
